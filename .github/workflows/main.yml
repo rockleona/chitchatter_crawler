@@ -11,7 +11,8 @@ jobs:
 
       - name: Runs the code
         run: |
-          python ./main.py
+          pip3 install xmltodict
+          python3 ./main.py
       
       - name: Get current date
         id: date
