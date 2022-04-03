@@ -9,5 +9,5 @@ def downloadData():
         import xmltodict, json
         xml_string = xmltodict.parse(r.text)
 
-        with open('./output/craweler_data.json', 'w', encoding='utf-8-sig') as f:
+        with open('./output/crawler_data.json', 'w', encoding='utf-8-sig') as f:
             json.dump(xml_string, f, ensure_ascii=False)
