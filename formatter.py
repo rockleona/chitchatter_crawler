@@ -43,6 +43,6 @@ class Formatter:
         
         combine_frames = [previous_data, new_data]
         result = pd.concat(combine_frames)
-        result.drop_duplicates(ignore_index=True)
+        result.drop_duplicates(ignore_index=True, subset='title', keep='last')
 
         result.to_csv('./output/keywords.csv', index_label='index')
