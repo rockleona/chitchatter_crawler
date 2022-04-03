@@ -30,7 +30,7 @@ class Formatter:
     def initCsvFile(self):
         import pandas as pd
         index_list = [num for num in range(0,len(self.crawler_data_list))]
-        df = pd.DataFrame(self.crawler_data_list, columns =['title', 'traffic', 'data', 'news'], index=index_list)
+        df = pd.DataFrame(self.crawler_data_list, columns =['title', 'traffic', 'date', 'news'], index=index_list)
         df.to_csv('./output/keywords.csv', index_label='index')
 
     def combineCsvFile(self):
@@ -39,7 +39,7 @@ class Formatter:
         previous_length = len(previous_data)
 
         index_list = [num for num in range(previous_length, previous_length + len(self.crawler_data_list))]
-        new_data = pd.DataFrame(self.crawler_data_list, columns =['title', 'traffic', 'data', 'news'], index=index_list)
+        new_data = pd.DataFrame(self.crawler_data_list, columns =['title', 'traffic', 'date', 'news'], index=index_list)
         
         combine_frames = [previous_data, new_data]
         result = pd.concat(combine_frames)
