@@ -7,6 +7,6 @@ if __name__ == '__main__':
     # viewer.listNews(data)
 
     import formatter
-    formatter = formatter.Formatter('./newdata.json')
+    formatter = formatter.Formatter('./output/crawler_data.json')
     # formatter.initCsvFile()
     formatter.combineCsvFile()
