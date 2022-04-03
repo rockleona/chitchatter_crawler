@@ -12,6 +12,7 @@ jobs:
       - name: Runs the code
         run: |
           pip3 install xmltodict
+          pip3 install pandas
           python3 ./main.py
       
       - name: Get current date
