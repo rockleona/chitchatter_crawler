@@ -1,0 +1,32 @@
+name: Get new Keywords
+on:
+  schedule :
+    - cron : '50 11,23 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Runs the code
+        run: |
+          python ./main.py
+      
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H-%M-%S')"
+
+      - name: Push to Github Pages 
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_USER: ${{ secrets.GIT_USER }}
+          GITHUB_EMAIL: ${{ secrets.GIT_EMAIL }}
+          COMMIT_MSG: Brand new publish at ${{ steps.date.outputs.date }}
+        run: |
+            git config user.name "$GITHUB_USER"
+            git config user.email "$GITHUB_EMAIL"
+            git add ./output/crawler_data.json
+            git add ./keywords.csv
+            git commit -m "$COMMIT_MSG"
+            git push
