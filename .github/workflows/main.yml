@@ -1,7 +1,7 @@
 name: Get new Keywords
 on:
   schedule :
-    - cron : '0 11,23 * * *'
+    - cron : '0 08-23 * * *'
 
 jobs:
   build:
@@ -9,15 +9,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Runs the code
+      - name: Runs environment
         run: |
           pip3 install xmltodict
           pip3 install pandas
-          python3 ./main.py
-      
+     
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H-%M-%S')"
+     
+      - name: Run Archive Mode
+        if: github.event.schedule == '0 08 * * *'
+        env:
+          DATE_MSG: ${{ steps.date.outputs.date }}
+        run : |
+          python3 ./main.py archive $DATE_MSG
+      
+      - name: Run crawl keywords
+        if: github.event.schedule != '0 08 * * *'
+        run : |
+          python3 ./main.py
 
       - name: Push to Github Repo 
         env: 
