@@ -1,12 +1,13 @@
 if __name__ == '__main__':
-    import crawler
-    crawler.downloadData()
-    
-    # import viewer
-    # data = viewer.readFile('./newdata.json')
-    # viewer.listNews(data)
-
+    import crawler, sys
     import formatter
+    
+    crawler.downloadData()
     formatter = formatter.Formatter('./output/crawler_data.json')
-    # formatter.initCsvFile()
-    formatter.combineCsvFile()
+
+    if sys.argv[1] == 'archive':
+        formatter.pushToArchive(sys.argv[2])
+        formatter.initCsvFile()
+    else:
+        formatter.combineCsvFile()
+

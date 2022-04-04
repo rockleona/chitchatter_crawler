@@ -46,3 +46,11 @@ class Formatter:
         result.drop_duplicates(ignore_index=True, subset='title', keep='last')
 
         result.to_csv('./output/keywords.csv', index_label='index')
+
+    def pushToArchive(self, date):
+        filename = './output/keywords' + date + '.csv'
+
+        import pandas as pd
+        previous_data = pd.read_csv('./output/keywords.csv', index_col='index')
+        previous_data.drop_duplicates(ignore_index=True, subset='title', keep='last')
+        previous_data.to_csv(filename, index_label='index')
