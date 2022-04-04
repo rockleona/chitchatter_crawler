@@ -5,9 +5,10 @@ if __name__ == '__main__':
     crawler.downloadData()
     formatter = formatter.Formatter('./output/crawler_data.json')
 
-    if str(sys.argv[1]) == 'archive':
-        formatter.pushToArchive(str(sys.argv[2]))
-        formatter.initCsvFile()
-    else:
+    if len(sys.argv) == 1:
         formatter.combineCsvFile()
-
+    else:
+        if str(sys.argv[1]) == 'archive':
+            formatter.pushToArchive(str(sys.argv[2]))
+            formatter.initCsvFile()
+    
