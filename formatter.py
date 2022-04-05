@@ -43,7 +43,7 @@ class Formatter:
         
         combine_frames = [previous_data, new_data]
         result = pd.concat(combine_frames)
-        result.drop_duplicates(ignore_index=True, subset='title', keep='last')
+        result.drop_duplicates(ignore_index=True, subset=['title', 'traffic'], keep='last', inplace=True)
 
         result.to_csv('./output/keywords.csv', index_label='index')
 
@@ -52,5 +52,5 @@ class Formatter:
 
         import pandas as pd
         previous_data = pd.read_csv('./output/keywords.csv', index_col='index')
-        previous_data.drop_duplicates(ignore_index=True, subset='title', keep='last')
+        previous_data.drop_duplicates(ignore_index=True, subset=['title', 'traffic'], keep='last', inplace=True)
         previous_data.to_csv(filename, index_label='index')
