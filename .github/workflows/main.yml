@@ -1,8 +1,9 @@
 name: Get new Keywords
 on:
   schedule :
-    - cron : '0 08 * * *'
-    - cron : '0 09-23 * * *'
+    - cron : '0 16 * * *'
+    - cron : '0 17-23 * * *'
+    - cron : '0 00-06 * * *'
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H-%M-%S')"
      
       - name: Run Archive Mode
-        if: github.event.schedule == '0 08 * * *'
+        if: github.event.schedule == '0 16 * * *'
         env:
           DATE_MSG: ${{ steps.date.outputs.date }}
         run : |
